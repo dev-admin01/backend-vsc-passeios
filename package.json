@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "npm run services:up && npm run services:wait:database && npm run migrations:up && vercel dev",
+    "services:up": "docker compose up -d",
+    "services:down": "docker compose down",
+    "services:stop": "docker compose stop",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "postinstall": "prisma generate && prisma migrate deploy"
+    "postinstall": "prisma generate && prisma migrate deploy",
+    "services:wait:database": "node infra/scripts/wait-for-postgres.js",
+    "migrations:up": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +24,11 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }
