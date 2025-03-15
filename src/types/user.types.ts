@@ -14,3 +14,8 @@ export interface User {
 export interface UserRequest extends User {
   password: string;
 }
+
+export interface AuthRequest {
+  email: string;
+  password: string;
+}
