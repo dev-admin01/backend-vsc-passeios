@@ -1,9 +1,9 @@
 import { Router } from "express";
+import { CreateUserController } from "./controllers/users/create_user_controller";
 
 const router = Router();
 
-router.get("/teste", (req, res) => {
-  res.json({ message: "Alguma resposta em JSON" });
-});
+// @ts-ignore
+router.post("/user", new CreateUserController().handle);
 
 export { router };

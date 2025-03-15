@@ -11,8 +11,8 @@ model Position {
   id_position       Int @id @default(autoincrement())
   description       String 
   users             User[]
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now())
 
   @@map("positions")
 }
@@ -24,8 +24,11 @@ model User {
    password         String @db.VarChar(72)
    positions        Position @relation(fields: [id_position], references: [id_position])
    id_position      Int
-   createdAt        DateTime @default(now())
-   updatedAt        DateTime @updatedAt
+   ddi              String? @db.VarChar(3)
+   ddd              String? @db.VarChar(3)
+   phone            String? @db.VarChar(10)
+   created_at       DateTime @default(now())
+   updated_at       DateTime @default(now())
  
    @@map("users") 
  }
