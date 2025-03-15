@@ -5,5 +5,5 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 exports.router = router;
 router.get("/teste", (req, res) => {
-    res.send("hello world");
+    res.json({ message: "Alguma resposta em JSON" });
 });

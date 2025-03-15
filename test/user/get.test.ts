@@ -1,6 +1,6 @@
 describe("GET api/user", () => {
   test("with valid inputs", async () => {
-    const response = await fetch("http://localhost:3000/api/user");
+    const response = await fetch("http://localhost:3000/api/teste");
 
     const responseBody = await response.json();
     console.log(responseBody);
