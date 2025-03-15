@@ -8,11 +8,28 @@ datasource db {
 }
 
 model Position {
-  id_position      String @id @default(uuid())
-  description      String 
-   
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id_position       Int @id @default(autoincrement())
+  description       String 
+  users             User[]
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now())
 
   @@map("positions")
 }
+
+model User {
+   id_user          String @id @default(uuid())
+   name             String @db.VarChar(256)
+   email            String @unique @db.VarChar(254)
+   password         String @db.VarChar(72)
+   positions        Position @relation(fields: [id_position], references: [id_position])
+   id_position      Int
+   ddi              String? @db.VarChar(3)
+   ddd              String? @db.VarChar(3)
+   phone            String? @db.VarChar(10)
+   created_at       DateTime @default(now())
+   updated_at       DateTime @default(now())
+ 
+   @@map("users") 
+ }
+
