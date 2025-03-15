@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 const { exec } = require("child_process");
 
 function checkPostgres() {
@@ -16,7 +15,7 @@ function checkPostgres() {
         // eslint-disable-next-line no-undef
         setTimeout(checkPostgres, 2000);
       }
-    }
+    },
   );
 }
 // eslint-disable-next-line no-undef

@@ -13,7 +13,8 @@
   },
   "include": [
     "src",
-    "src/api"
+    "src/api",
+    "test/**/*"
   ],
   "exclude": [
     "node_modules",

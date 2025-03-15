@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/teste", (req, res) => {
-  res.send("hello world");
+  res.json({ message: "Alguma resposta em JSON" });
 });
 
 export { router };
