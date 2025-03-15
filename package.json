@@ -10,12 +10,15 @@
     "services:stop": "docker compose stop",
     "test:watch": "npx jest --watch --runInBand",
     "build": "tsc",
-    "postinstall": "prisma generate && prisma migrate deploy",
+    "postinstall": "prisma generate && prisma migrate deploy && prisma db seed",
     "services:wait:database": "node infra/scripts/wait-for-postgres.js",
     "migrations:up": "npx prisma migrate dev",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
     "lint:eslint:check": "npx eslint ."
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
