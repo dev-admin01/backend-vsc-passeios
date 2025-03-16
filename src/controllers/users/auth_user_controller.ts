@@ -6,6 +6,8 @@ class AuthUserController {
   async handle(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
+      console.log(email);
+      console.log(password);
 
       const userService = new AuthUserService();
 
