@@ -16,7 +16,7 @@ describe("POST api/auth", () => {
   test("with valid data", async () => {
     let user = {
       name: "teste123",
-      email: "teste@teste.com",
+      email: "testando@teste.com",
       password: "senha123",
       id_position: 1,
       ddi: "55",
@@ -39,7 +39,7 @@ describe("POST api/auth", () => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        email: "teste@teste.com",
+        email: "testando@teste.com",
         password: "senha123",
       }),
     });
@@ -47,13 +47,12 @@ describe("POST api/auth", () => {
     expect(response1.status).toBe(200);
 
     const responseBody1 = await response1.json();
-
     expect(uuidVersion(responseBody1.user.id_user)).toBe(4);
 
     expect(responseBody1.user).toMatchObject({
       id_user: responseBody.user.id_user,
       name: "teste123",
-      email: "teste@teste.com",
+      email: "testando@teste.com",
       id_position: 1,
     });
   });
@@ -61,7 +60,7 @@ describe("POST api/auth", () => {
   test("with invalid data", async () => {
     let user = {
       name: "teste123",
-      email: "teste@teste.com",
+      email: "testando@teste.com",
       password: "senha123",
       id_position: 1,
       ddi: "55",
@@ -82,7 +81,7 @@ describe("POST api/auth", () => {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        email: "teste@teste.com",
+        email: "testando@teste.com",
         password: "senhaerrada123",
       }),
     });

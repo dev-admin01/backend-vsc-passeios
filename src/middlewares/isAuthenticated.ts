@@ -28,7 +28,6 @@ export function isAuthenticated(
 
   try {
     const { sub } = verify(token, process.env.JWT_SECRET) as Payload;
-
     req.id_user = sub;
 
     return next();

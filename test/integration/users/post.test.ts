@@ -16,7 +16,7 @@ describe("Users Integration Test", () => {
     test("should create a user", async () => {
       let user = {
         name: "teste123",
-        email: "teste@teste.com",
+        email: "teste123@teste.com",
         password: "senha123",
         id_position: 1,
         ddi: "55",
@@ -36,7 +36,7 @@ describe("Users Integration Test", () => {
       expect(responseBody.user).toEqual({
         id_user: responseBody.user.id_user,
         name: "teste123",
-        email: "teste@teste.com",
+        email: "teste123@teste.com",
         id_position: 1,
         ddi: "55",
         ddd: "11",
