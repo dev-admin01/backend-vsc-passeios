@@ -45,7 +45,6 @@ describe("POST api/auth", () => {
         });
         expect(response1.status).toBe(200);
         const responseBody1 = await response1.json();
-        console.log(responseBody1);
         expect((0, uuid_1.version)(responseBody1.user.id_user)).toBe(4);
         expect(responseBody1.user).toMatchObject({
             id_user: responseBody.user.id_user,
