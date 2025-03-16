@@ -19,6 +19,9 @@
   "include": [
     "src",
     "src/api",
+    "test",
+    "prisma",
+    "seeds"
   ],
   "exclude": [
     "node_modules",

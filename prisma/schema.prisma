@@ -32,3 +32,15 @@ model User {
  
    @@map("users") 
  }
+
+ model Service {
+  id_service       Int @id @default(autoincrement())
+  description      String 
+  type             String @db.VarChar(1)
+  price            Decimal @db.Decimal(10, 2)
+  observation      String @db.Text
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now())
+
+  @@map("services")
+}

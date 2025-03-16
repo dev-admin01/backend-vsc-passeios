@@ -6,6 +6,7 @@ import { VerifyMigrationsController } from "./controllers/migrations/verify_migr
 import { RunMigrationsController } from "./controllers/migrations/run_migrations_controller";
 import { AuthUserController } from "./controllers/users/auth_user_controller";
 import { DetailUserController } from "./controllers/users/detail_user_controller";
+import { CreateServiceController } from "./controllers/service/create_service_cotnroller";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 const router = Router();
@@ -25,5 +26,7 @@ router.post("/user", new CreateUserController().handle);
 router.post("/auth", new AuthUserController().handle);
 // @ts-ignore
 router.get("/me", isAuthenticated, new DetailUserController().handle);
+// @ts-ignore
+router.post("/services", isAuthenticated, new CreateServiceController().handle);
 
 export { router };
