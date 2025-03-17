@@ -14,6 +14,11 @@ const list_service_controller_1 = require("./controllers/service/list_service_co
 const get_service_controller_1 = require("./controllers/service/get_service_controller");
 const update_service_controller_1 = require("./controllers/service/update_service_controller");
 const delete_service_controller_1 = require("./controllers/service/delete_service_controller");
+const create_costumer_controller_1 = require("./controllers/costumers/create_costumer_controller");
+const list_costumer_controller_1 = require("./controllers/costumers/list_costumer_controller");
+const get_costumer_controller_1 = require("./controllers/costumers/get_costumer_controller");
+const update_costumer_controller_1 = require("./controllers/costumers/update_costumer_controller");
+const delete_costumer_controller_1 = require("./controllers/costumers/delete_costumer_controller");
 const isAuthenticated_1 = require("./middlewares/isAuthenticated");
 const router = (0, express_1.Router)();
 exports.router = router;
@@ -46,3 +51,21 @@ isAuthenticated_1.isAuthenticated, new update_service_controller_1.UpdateService
 router.delete("/services/:id", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new delete_service_controller_1.DeleteServiceController().handle);
+// @ts-ignore
+router.post("/costumers", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new create_costumer_controller_1.CreateCostumerController().handle);
+// @ts-ignore
+router.get("/costumers", isAuthenticated_1.isAuthenticated, new list_costumer_controller_1.ListCostumerController().handle);
+// @ts-ignore
+router.get("/costumers/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new get_costumer_controller_1.GetCostumerController().handle);
+// @ts-ignore
+router.put("/costumers/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new update_costumer_controller_1.UpdateCostumerController().handle);
+// @ts-ignore
+router.delete("/costumers/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new delete_costumer_controller_1.DeleteCostumerController().handle);

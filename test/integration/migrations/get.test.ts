@@ -12,7 +12,6 @@ describe("GET to /api/v1/migrations sould return 200", () => {
     expect(response.status).toBe(200);
 
     const responseBody = await response.json();
-    console.log(responseBody);
     expect(Array.isArray(responseBody.migrations)).toBe(true);
     expect(responseBody.migrations.length).toBeGreaterThan(0);
   });

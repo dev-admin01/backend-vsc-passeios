@@ -11,6 +11,11 @@ import { ListServiceController } from "./controllers/service/list_service_contro
 import { GetServiceController } from "./controllers/service/get_service_controller";
 import { UpdateServiceController } from "./controllers/service/update_service_controller";
 import { DeleteServiceController } from "./controllers/service/delete_service_controller";
+import { CreateCostumerController } from "./controllers/costumers/create_costumer_controller";
+import { ListCostumerController } from "./controllers/costumers/list_costumer_controller";
+import { GetCostumerController } from "./controllers/costumers/get_costumer_controller";
+import { UpdateCostumerController } from "./controllers/costumers/update_costumer_controller";
+import { DeleteCostumerController } from "./controllers/costumers/delete_costumer_controller";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 const router = Router();
@@ -51,6 +56,36 @@ router.delete(
   // @ts-ignore
   isAuthenticated,
   new DeleteServiceController().handle,
+);
+// @ts-ignore
+router.post(
+  "/costumers",
+  // @ts-ignore
+  isAuthenticated,
+  new CreateCostumerController().handle,
+);
+// @ts-ignore
+router.get("/costumers", isAuthenticated, new ListCostumerController().handle);
+// @ts-ignore
+router.get(
+  "/costumers/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new GetCostumerController().handle,
+);
+// @ts-ignore
+router.put(
+  "/costumers/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new UpdateCostumerController().handle,
+);
+// @ts-ignore
+router.delete(
+  "/costumers/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new DeleteCostumerController().handle,
 );
 
 export { router };

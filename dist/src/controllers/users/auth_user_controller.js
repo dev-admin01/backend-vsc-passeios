@@ -7,8 +7,6 @@ class AuthUserController {
     async handle(req, res) {
         try {
             const { email, password } = req.body;
-            console.log(email);
-            console.log(password);
             const userService = new auth_user_service_1.AuthUserService();
             const user = await userService.execute({ email, password });
             if (user.email === "invalid") {
