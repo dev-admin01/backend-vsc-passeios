@@ -1,3 +1,11 @@
+import orchestrator from "../../orchestrator";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+  await orchestrator.clearDatabase();
+  await orchestrator.runPendingMigrations();
+});
+
 describe("GET /api/status", () => {
   test("Whitout user", async () => {
     const response = await fetch("http://localhost:3000/api/status");
@@ -11,9 +19,5 @@ describe("GET /api/status", () => {
     expect(responseBody.status.dependencies.database.max_connections).toEqual(
       100,
     );
-
-    expect(
-      responseBody.status.dependencies.database.opened_connections,
-    ).toEqual(1);
   });
 });

@@ -1,7 +1,14 @@
 import { version as uuidVersion } from "uuid";
+import orchestrator from "../../orchestrator";
 
 import { describe, test, expect, beforeEach, afterAll } from "@jest/globals";
 import prismaClient from "../../../src/prisma";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+  await orchestrator.clearDatabase();
+  await orchestrator.runPendingMigrations();
+});
 
 describe("Users Integration Test", () => {
   describe("POST /api/createuser", () => {

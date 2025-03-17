@@ -43,4 +43,20 @@ model User {
   updated_at       DateTime @default(now())
 
   @@map("services")
+  
+}
+
+model costumer {
+  id_costumer   String   @id @default(uuid())
+  nome          String
+  cpf_cnpj      String?
+  passaporte    String?
+  razao_social  String?
+  nome_fantasia String?
+  ddi           String?
+  ddd           String?
+  telefone      String?
+  indicacao     String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }

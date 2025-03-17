@@ -5,6 +5,7 @@ beforeAll(async () => {
   await orchestrator.clearDatabase();
   await orchestrator.runPendingMigrations();
 });
+
 describe("POST /api/services", () => {
   test("should service a user", async () => {
     const response1 = await fetch("http://localhost:3000/api/auth", {
