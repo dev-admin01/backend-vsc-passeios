@@ -157,7 +157,6 @@ router.get(
 router.get(
   "/orders/:id",
   // @ts-ignore
-  isAuthenticated,
   new GetOrderController().handle,
 );
 // @ts-ignore
