@@ -115,7 +115,7 @@ isAuthenticated_1.isAuthenticated, new list_order_controller_1.ListOrderControll
 // @ts-ignore
 router.get("/orders/:id", 
 // @ts-ignore
-isAuthenticated_1.isAuthenticated, new get_order_controller_1.GetOrderController().handle);
+new get_order_controller_1.GetOrderController().handle);
 // @ts-ignore
 router.put("/orders/:id", 
 // @ts-ignore
