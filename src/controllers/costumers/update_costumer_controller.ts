@@ -8,6 +8,7 @@ class UpdateCostumerController {
       const { id } = req.params;
       const {
         nome,
+        email,
         cpf_cnpj,
         passaporte,
         razao_social,
@@ -21,6 +22,7 @@ class UpdateCostumerController {
       const updateCostumerService = new UpdateCostumerService();
       const updatedCostumer = await updateCostumerService.execute({
         id_costumer: id,
+        email,
         nome,
         cpf_cnpj,
         passaporte,

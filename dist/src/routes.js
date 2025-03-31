@@ -34,6 +34,8 @@ const list_order_controller_1 = require("./controllers/orders/list_order_control
 const get_order_controller_1 = require("./controllers/orders/get_order_controller");
 const update_order_controller_1 = require("./controllers/orders/update_order_controller");
 const delete_order_services_1 = require("./controllers/orders/delete_order_services");
+const custumer_docs_controller_1 = require("./controllers/costumers/custumer_docs_controller");
+const send_status_controller_1 = require("./controllers/orders/send_status_controller");
 const isAuthenticated_1 = require("./middlewares/isAuthenticated");
 const router = (0, express_1.Router)();
 exports.router = router;
@@ -124,3 +126,9 @@ isAuthenticated_1.isAuthenticated, new update_order_controller_1.UpdateOrderCont
 router.delete("/orders/:id", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new delete_order_services_1.DeleteOrderController().handle);
+// @ts-ignore
+router.put("/orderdocs", new custumer_docs_controller_1.UpdateOrderDocs().handle);
+// @ts-ignore
+router.put("/statusupdate", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new send_status_controller_1.SendStatusOrderController().handle);

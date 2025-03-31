@@ -31,6 +31,14 @@ async function main() {
         // Caso já existam dados, esse parâmetro evita duplicatas
         skipDuplicates: true,
     });
+    await prisma.orders_status.createMany({
+        data: [
+            { description: "Aguardando envio" },
+            { description: "Enviado ao Cliente" },
+            { description: "Comprovante Recebidos" },
+        ],
+        skipDuplicates: true,
+    });
 }
 main()
     .catch(e => {

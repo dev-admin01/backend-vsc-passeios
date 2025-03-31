@@ -6,11 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCostumerService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 class UpdateCostumerService {
-    async execute({ id_costumer, nome, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, }) {
+    async execute({ id_costumer, nome, email, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, }) {
         const updatedCostumer = await prisma_1.default.costumer.update({
             where: { id_costumer },
             data: {
                 nome,
+                email,
                 cpf_cnpj,
                 passaporte,
                 razao_social,

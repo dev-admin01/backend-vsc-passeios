@@ -13,6 +13,7 @@ class ListCostumerService {
             ? {
                 OR: [
                     { nome: { contains: search, mode: "insensitive" } },
+                    { email: { contains: search, mode: "insensitive" } },
                     { cpf_cnpj: { contains: search, mode: "insensitive" } },
                     { passaporte: { contains: search, mode: "insensitive" } },
                     { razao_social: { contains: search, mode: "insensitive" } },
@@ -38,6 +39,7 @@ class ListCostumerService {
             select: {
                 id_costumer: true,
                 nome: true,
+                email: true,
                 cpf_cnpj: true,
                 passaporte: true,
                 razao_social: true,

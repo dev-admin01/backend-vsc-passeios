@@ -7,6 +7,7 @@ class GetCostumerService {
       select: {
         id_costumer: true,
         nome: true,
+        email: true,
         cpf_cnpj: true,
         passaporte: true,
         razao_social: true,

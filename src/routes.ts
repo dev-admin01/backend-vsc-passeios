@@ -32,6 +32,9 @@ import { GetOrderController } from "./controllers/orders/get_order_controller";
 import { UpdateOrderController } from "./controllers/orders/update_order_controller";
 import { DeleteOrderController } from "./controllers/orders/delete_order_services";
 
+import { UpdateOrderDocs } from "./controllers/costumers/custumer_docs_controller";
+import { SendStatusOrderController } from "./controllers/orders/send_status_controller";
+
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 const router = Router();
@@ -172,6 +175,16 @@ router.delete(
   // @ts-ignore
   isAuthenticated,
   new DeleteOrderController().handle,
+);
+// @ts-ignore
+router.put("/orderdocs", new UpdateOrderDocs().handle);
+
+// @ts-ignore
+router.put(
+  "/statusupdate",
+  // @ts-ignore
+  isAuthenticated,
+  new SendStatusOrderController().handle,
 );
 
 export { router };

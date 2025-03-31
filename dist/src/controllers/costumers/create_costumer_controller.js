@@ -6,10 +6,11 @@ const erros_1 = require("../../shared/erros");
 class CreateCostumerController {
     async handle(req, res) {
         try {
-            const { nome, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, } = req.body;
+            const { nome, email, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, } = req.body;
             const createCostumerService = new create_costumer_service_1.CreateCostumerService();
             const costumer = await createCostumerService.execute({
                 nome,
+                email,
                 cpf_cnpj,
                 passaporte,
                 razao_social,
