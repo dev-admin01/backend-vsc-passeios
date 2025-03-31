@@ -44,12 +44,6 @@ class UpdateOrderService {
                             : null,
                     })),
                 },
-                // Cria um registro em orders_history para o histórico da ordem
-                orders_history: {
-                    create: {
-                        id_user,
-                    },
-                },
             },
             select: {
                 id_order: true,
@@ -83,6 +77,13 @@ class UpdateOrderService {
                         suggested_date: true,
                     },
                 },
+            },
+        });
+        await prisma_1.default.orders_history.create({
+            data: {
+                id_order,
+                id_user,
+                id_status_order: 1,
             },
         });
         return updatedOrder;

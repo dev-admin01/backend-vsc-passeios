@@ -52,8 +52,9 @@ model User {
 model costumer {
   id_costumer   String   @id @default(uuid())
   nome          String
+  email         String  @unique
   cpf_cnpj      String? @unique
-  passaporte    String?
+  passaporte    String? @unique
   razao_social  String?
   nome_fantasia String?
   ddi           String?
@@ -122,7 +123,7 @@ model order_documentation {
   id_order               String
   order                  orders   @relation(fields: [id_order], references: [id_order], onDelete: Cascade)
   name                   String
-  file                   Bytes?   
+  file                   String   
   created_at             DateTime @default(now())
   updated_at             DateTime @default(now())
   
@@ -130,13 +131,16 @@ model order_documentation {
 }
 
 model orders_history {
-  id_order_history Int    @id @default(autoincrement())
+  id_order_history Int @id @default(autoincrement())
 
   id_order String
   order    orders @relation(fields: [id_order], references: [id_order], onDelete: Cascade)
 
-  id_user String
-  user    User @relation(fields: [id_user], references: [id_user])
+  id_user String?
+  user    User? @relation(fields: [id_user], references: [id_user])
+
+  id_status_order Int
+  status orders_status @relation(fields: [id_status_order], references: [id_status_order])
 
   created_at DateTime @default(now())
 
@@ -145,9 +149,10 @@ model orders_history {
 
 model orders_status {
   id_status_order Int    @id @default(autoincrement())
-  description     String
+  description     String @unique
   created_at      DateTime @default(now())
 
   @@map("orders_status")
   orders orders[]
+  orders_history orders_history[]
 }

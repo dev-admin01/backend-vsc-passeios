@@ -7,6 +7,7 @@ class CreateCostumerController {
     try {
       const {
         nome,
+        email,
         cpf_cnpj,
         passaporte,
         razao_social,
@@ -21,6 +22,7 @@ class CreateCostumerController {
 
       const costumer = await createCostumerService.execute({
         nome,
+        email,
         cpf_cnpj,
         passaporte,
         razao_social,

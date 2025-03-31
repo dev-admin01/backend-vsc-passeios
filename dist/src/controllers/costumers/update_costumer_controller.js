@@ -7,10 +7,11 @@ class UpdateCostumerController {
     async handle(req, res) {
         try {
             const { id } = req.params;
-            const { nome, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, } = req.body;
+            const { nome, email, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, } = req.body;
             const updateCostumerService = new update_costumer_service_1.UpdateCostumerService();
             const updatedCostumer = await updateCostumerService.execute({
                 id_costumer: id,
+                email,
                 nome,
                 cpf_cnpj,
                 passaporte,

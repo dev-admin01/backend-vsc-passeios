@@ -3,6 +3,7 @@ import { CostumerType } from "../../types/costumer.type";
 class CreateCostumerService {
   async execute({
     nome,
+    email,
     cpf_cnpj,
     passaporte,
     razao_social,
@@ -15,6 +16,7 @@ class CreateCostumerService {
     const costumer = await prismaClient.costumer.create({
       data: {
         nome,
+        email,
         cpf_cnpj,
         passaporte,
         razao_social,
@@ -27,6 +29,7 @@ class CreateCostumerService {
       select: {
         id_costumer: true,
         nome: true,
+        email: true,
         cpf_cnpj: true,
         passaporte: true,
         razao_social: true,

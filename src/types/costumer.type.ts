@@ -2,6 +2,7 @@
 export interface CostumerType {
   id_costumer?: string;
   nome: string;
+  email: string;
   cpf_cnpj?: string;
   passaporte?: string;
   razao_social?: string;

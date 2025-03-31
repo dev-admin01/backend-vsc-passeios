@@ -6,10 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCostumerService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 class CreateCostumerService {
-    async execute({ nome, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, }) {
+    async execute({ nome, email, cpf_cnpj, passaporte, razao_social, nome_fantasia, ddi, ddd, telefone, indicacao, }) {
         const costumer = await prisma_1.default.costumer.create({
             data: {
                 nome,
+                email,
                 cpf_cnpj,
                 passaporte,
                 razao_social,
@@ -22,6 +23,7 @@ class CreateCostumerService {
             select: {
                 id_costumer: true,
                 nome: true,
+                email: true,
                 cpf_cnpj: true,
                 passaporte: true,
                 razao_social: true,

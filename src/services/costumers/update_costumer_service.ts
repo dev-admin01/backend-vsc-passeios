@@ -9,6 +9,7 @@ class UpdateCostumerService {
   async execute({
     id_costumer,
     nome,
+    email,
     cpf_cnpj,
     passaporte,
     razao_social,
@@ -22,6 +23,7 @@ class UpdateCostumerService {
       where: { id_costumer },
       data: {
         nome,
+        email,
         cpf_cnpj,
         passaporte,
         razao_social,

@@ -55,6 +55,7 @@ class CreateOrderService {
             data: {
                 id_order: order.id_order,
                 id_user,
+                id_status_order: 1,
             },
         });
         const completeOrder = await prisma_1.default.orders.findUnique({
