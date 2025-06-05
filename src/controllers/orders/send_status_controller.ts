@@ -5,11 +5,8 @@ import { ServiceError } from "../../shared/erros";
 class SendStatusOrderController {
   async handle(req: Request, res: Response) {
     try {
-      const { id_order, id_user, id_status_order } = req.body;
-      console.log("id_order:", id_order);
-      console.log("id_user:", id_user);
-
-      console.log("id_status_order:", id_status_order);
+      const { id_order, id_status_order } = req.body;
+      const id_user = req.id_user;
 
       const updateOrderService = new SendStatusService();
       await updateOrderService.execute({

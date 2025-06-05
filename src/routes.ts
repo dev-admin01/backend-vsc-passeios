@@ -35,6 +35,30 @@ import { DeleteOrderController } from "./controllers/orders/delete_order_service
 import { UpdateOrderDocs } from "./controllers/costumers/custumer_docs_controller";
 import { SendStatusOrderController } from "./controllers/orders/send_status_controller";
 
+// Novos controllers
+import { CreateMidiaController } from "./controllers/midia/create_midia_controller";
+import { ListMidiaController } from "./controllers/midia/list_midia_controller";
+import { GetMidiaController } from "./controllers/midia/get_midia_controller";
+import { UpdateMidiaController } from "./controllers/midia/update_midia_controller";
+import { DeleteMidiaController } from "./controllers/midia/delete_midia_controller";
+
+import { CreateCouponsController } from "./controllers/coupons/create_coupons_controller";
+import { ListCouponsController } from "./controllers/coupons/list_coupons_controller";
+import { GetCouponsController } from "./controllers/coupons/get_coupons_controller";
+import { UpdateCouponsController } from "./controllers/coupons/update_coupons_controller";
+import { DeleteCouponsController } from "./controllers/coupons/delete_coupons_controller";
+
+import { CreateCondicaoPagamentoController } from "./controllers/condicao_pagamento/create_condicao_pagamento_controller";
+import { ListCondicaoPagamentoController } from "./controllers/condicao_pagamento/list_condicao_pagamento_controller";
+import { GetCondicaoPagamentoController } from "./controllers/condicao_pagamento/get_condicao_pagamento_controller";
+import { UpdateCondicaoPagamentoController } from "./controllers/condicao_pagamento/update_condicao_pagamento_controller";
+import { DeleteCondicaoPagamentoController } from "./controllers/condicao_pagamento/delete_condicao_pagamento_controller";
+
+import { GetOrderPDFDataController } from "./controllers/pdf/get_order_pdf_data_controller";
+
+import { GetOrderRegisterLinkController } from "./controllers/register_link/get_orde_register_controller";
+import { GetDocsValidationController } from "./controllers/order_documentation/get_docs_validation_controller";
+
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 
 const router = Router();
@@ -186,5 +210,91 @@ router.put(
   isAuthenticated,
   new SendStatusOrderController().handle,
 );
+
+// Rotas para Midia
+// @ts-ignore
+router.post("/midia", isAuthenticated, new CreateMidiaController().handle);
+// @ts-ignore
+router.get("/midia", isAuthenticated, new ListMidiaController().handle);
+// @ts-ignore
+router.get("/midia/:id", isAuthenticated, new GetMidiaController().handle);
+// @ts-ignore
+router.put("/midia/:id", isAuthenticated, new UpdateMidiaController().handle);
+// @ts-ignore
+router.delete(
+  "/midia/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new DeleteMidiaController().handle,
+);
+
+// Rotas para Coupons
+// @ts-ignore
+router.post("/coupons", isAuthenticated, new CreateCouponsController().handle);
+// @ts-ignore
+router.get("/coupons", isAuthenticated, new ListCouponsController().handle);
+// @ts-ignore
+router.get("/coupons/:id", isAuthenticated, new GetCouponsController().handle);
+// @ts-ignore
+router.put(
+  "/coupons/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new UpdateCouponsController().handle,
+);
+// @ts-ignore
+router.delete(
+  "/coupons/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new DeleteCouponsController().handle,
+);
+
+// Rotas para Condicao_Pagamento
+// @ts-ignore
+router.post(
+  "/condicao-pagamento",
+  // @ts-ignore
+  isAuthenticated,
+  new CreateCondicaoPagamentoController().handle,
+);
+// @ts-ignore
+router.get(
+  "/condicao-pagamento",
+  // @ts-ignore
+  isAuthenticated,
+  new ListCondicaoPagamentoController().handle,
+);
+// @ts-ignore
+router.get(
+  "/condicao-pagamento/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new GetCondicaoPagamentoController().handle,
+);
+// @ts-ignore
+router.put(
+  "/condicao-pagamento/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new UpdateCondicaoPagamentoController().handle,
+);
+// @ts-ignore
+router.delete(
+  "/condicao-pagamento/:id",
+  // @ts-ignore
+  isAuthenticated,
+  new DeleteCondicaoPagamentoController().handle,
+);
+
+// Rotas para PDF
+// @ts-ignore
+router.get("/pdf/order/:id", new GetOrderPDFDataController().handle);
+
+// @ts-ignore
+router.get("/register/order/:id", new GetOrderRegisterLinkController().handle);
+
+// @ts-ignore
+router.get("/orderdocs/:id", new GetDocsValidationController().handle);
 
 export { router };

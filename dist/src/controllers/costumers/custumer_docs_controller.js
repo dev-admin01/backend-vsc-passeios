@@ -6,9 +6,10 @@ const erros_1 = require("../../shared/erros");
 class UpdateOrderDocs {
     async handle(req, res) {
         try {
-            const { id_order, cpf_cnpj, passaport, name, email, ddi, ddd, phone, compPag, cnh, } = req.body;
+            const body = req.body;
+            const { id_order, cpf_cnpj, passaport, name, email, ddi, ddd, phone, compPag, cnh, } = body;
             const createCostumerService = new custumer_docs_service_1.UpdateOrderDocsService();
-            const update_status = await createCostumerService.execute({
+            await createCostumerService.execute({
                 id_order,
                 cpf_cnpj,
                 passaporte: passaport,
@@ -20,9 +21,8 @@ class UpdateOrderDocs {
                 compPag,
                 cnh,
             });
-            return res.status(201).json({
+            return res.status(200).json({
                 message: "Comprovante enviado com sucesso",
-                update_status,
                 status_code: 200,
             });
         }

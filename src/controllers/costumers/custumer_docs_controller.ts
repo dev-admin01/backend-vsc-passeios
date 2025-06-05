@@ -5,6 +5,7 @@ import { ServiceError } from "../../shared/erros";
 class UpdateOrderDocs {
   async handle(req: Request, res: Response) {
     try {
+      const body = req.body;
       const {
         id_order,
         cpf_cnpj,
@@ -16,7 +17,8 @@ class UpdateOrderDocs {
         phone,
         compPag,
         cnh,
-      } = req.body;
+      } = body;
+
       const createCostumerService = new UpdateOrderDocsService();
 
       await createCostumerService.execute({
@@ -32,7 +34,7 @@ class UpdateOrderDocs {
         cnh,
       });
 
-      return res.status(201).json({
+      return res.status(200).json({
         message: "Comprovante enviado com sucesso",
         status_code: 200,
       });

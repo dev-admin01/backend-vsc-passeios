@@ -1,4 +1,5 @@
 import prismaClient from "../../prisma";
+import { ConvertCurrency } from "../../shared/convert_currency";
 import { IUpdateOrderRequest } from "../../types/order.type";
 
 class UpdateOrderService {
@@ -14,6 +15,7 @@ class UpdateOrderService {
     pre_ddi,
     pre_ddd,
     pre_phone,
+    id_cond_pag,
   }: IUpdateOrderRequest) {
     const updatedOrder = await prismaClient.orders.update({
       where: { id_order },
@@ -27,6 +29,7 @@ class UpdateOrderService {
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag,
         orders_service: {
           update: services
             .filter(service => service.id_order_service !== undefined)
@@ -35,7 +38,7 @@ class UpdateOrderService {
               data: {
                 id_service: service.id_service,
                 discount: service.discount,
-                price: service.price,
+                price: ConvertCurrency.realToCents(service.price),
                 suggested_date: service.suggested_date
                   ? new Date(service.suggested_date)
                   : null,
@@ -46,7 +49,7 @@ class UpdateOrderService {
             .map(service => ({
               id_service: service.id_service,
               discount: service.discount,
-              price: service.price,
+              price: ConvertCurrency.realToCents(service.price),
               suggested_date: service.suggested_date
                 ? new Date(service.suggested_date)
                 : null,
@@ -61,6 +64,7 @@ class UpdateOrderService {
         pre_ddi: true,
         pre_ddd: true,
         pre_phone: true,
+        id_cond_pag: true,
         price: true,
         created_at: true,
         costumer: {

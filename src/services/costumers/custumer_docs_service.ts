@@ -33,7 +33,7 @@ class UpdateOrderDocsService {
       where: { id_order },
       data: {
         id_costumer: costumer.id_costumer,
-        id_status_order: 3,
+        id_status_order: 6,
       },
     });
 
@@ -60,7 +60,7 @@ class UpdateOrderDocsService {
     await prismaClient.orders_history.create({
       data: {
         id_order,
-        id_status_order: 3,
+        id_status_order: 6,
       },
     });
   }

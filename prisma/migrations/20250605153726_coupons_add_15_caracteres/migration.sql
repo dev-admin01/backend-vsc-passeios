@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "coupons" ALTER COLUMN "coupon" SET DATA TYPE VARCHAR(15);

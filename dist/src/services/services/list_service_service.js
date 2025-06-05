@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ListServiceService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 const client_1 = require("@prisma/client");
+const convert_currency_1 = require("../../shared/convert_currency");
 class ListServiceService {
     async execute({ search, page, perpage }) {
         const skip = (page - 1) * perpage;
@@ -49,9 +50,13 @@ class ListServiceService {
                 type: true,
                 price: true,
                 observation: true,
+                time: true,
                 created_at: true,
                 updated_at: true,
             },
+        });
+        services.forEach(service => {
+            service.price = convert_currency_1.ConvertCurrency.centsToReal(service.price);
         });
         return {
             services,

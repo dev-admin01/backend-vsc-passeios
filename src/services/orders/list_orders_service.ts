@@ -1,65 +1,74 @@
 import prismaClient from "../../prisma";
 import { Prisma } from "@prisma/client";
-
-interface IListOrdersRequest {
-  search?: string;
-  page: number;
-  perpage: number;
-}
+import { IListOrdersRequest } from "../../types/order.type";
+import { ConvertCurrency } from "../../shared/convert_currency";
 
 class ListOrderService {
-  async execute({ search, page, perpage }: IListOrdersRequest) {
+  async execute({ search, page, perpage, id_user }: IListOrdersRequest) {
     const skip = (page - 1) * perpage;
 
+    // Buscar a posição do usuário se id_user for fornecido
+    let userPosition: number;
+    if (id_user) {
+      const user = await prismaClient.user.findUnique({
+        where: { id_user },
+        select: { id_position: true },
+      });
+      userPosition = user?.id_position;
+    }
+
     // whereCondition para buscar por costumer.nome ou user.name
-    const whereCondition: Prisma.ordersWhereInput = search
-      ? {
-          OR: [
-            {
-              costumer: {
-                nome: {
+    const whereCondition: Prisma.ordersWhereInput = {
+      ...(search
+        ? {
+            OR: [
+              {
+                costumer: {
+                  nome: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              },
+              {
+                user: {
+                  name: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              },
+              {
+                status: {
+                  description: {
+                    contains: search,
+                    mode: "insensitive",
+                  },
+                },
+              },
+              {
+                order_number: {
                   contains: search,
                   mode: "insensitive",
                 },
               },
-            },
-            {
-              user: {
-                name: {
+              {
+                pre_name: {
                   contains: search,
                   mode: "insensitive",
                 },
               },
-            },
-            {
-              status: {
-                description: {
+              {
+                pre_email: {
                   contains: search,
                   mode: "insensitive",
                 },
               },
-            },
-            {
-              order_number: {
-                contains: search,
-                mode: "insensitive",
-              },
-            },
-            {
-              pre_name: {
-                contains: search,
-                mode: "insensitive",
-              },
-            },
-            {
-              pre_email: {
-                contains: search,
-                mode: "insensitive",
-              },
-            },
-          ],
-        }
-      : {};
+            ],
+          }
+        : {}),
+      ...(userPosition === 3 ? { id_user } : {}),
+    };
 
     // Contar total
     const totalCount = await prismaClient.orders.count({
@@ -122,12 +131,17 @@ class ListOrderService {
       },
     });
 
+    ordersList.forEach(order => {
+      order.price = ConvertCurrency.centsToReal(order.price);
+    });
+
     return {
       orders: ordersList,
       page,
       perpage,
       lastPage,
       totalCount,
+      userPosition,
     };
   }
 }

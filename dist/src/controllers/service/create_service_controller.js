@@ -6,16 +6,17 @@ const erros_1 = require("../../shared/erros");
 class CreateServiceController {
     async handle(req, res) {
         try {
-            const { description, type, price, observation } = req.body;
+            const { description, type, price, observation, time } = req.body;
             const serviceServ = new create_service_service_1.CreateServiceService();
             const service = await serviceServ.execute({
                 description,
                 type,
                 price,
                 observation,
+                time,
             });
             return res.status(201).json({
-                message: "Service created successfully",
+                message: "Passeio criado com sucesso!",
                 service,
                 status_code: 201,
             });

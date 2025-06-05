@@ -22,7 +22,7 @@ class GetServiceController {
       });
     } catch (error) {
       const publicErrorObject = new ServiceError({
-        message: "Erro ao buscar o serviço.",
+        message: "Erro ao buscar o passeio.",
         cause: error,
       });
       console.error(publicErrorObject);

@@ -36,6 +36,25 @@ const update_order_controller_1 = require("./controllers/orders/update_order_con
 const delete_order_services_1 = require("./controllers/orders/delete_order_services");
 const custumer_docs_controller_1 = require("./controllers/costumers/custumer_docs_controller");
 const send_status_controller_1 = require("./controllers/orders/send_status_controller");
+// Novos controllers
+const create_midia_controller_1 = require("./controllers/midia/create_midia_controller");
+const list_midia_controller_1 = require("./controllers/midia/list_midia_controller");
+const get_midia_controller_1 = require("./controllers/midia/get_midia_controller");
+const update_midia_controller_1 = require("./controllers/midia/update_midia_controller");
+const delete_midia_controller_1 = require("./controllers/midia/delete_midia_controller");
+const create_coupons_controller_1 = require("./controllers/coupons/create_coupons_controller");
+const list_coupons_controller_1 = require("./controllers/coupons/list_coupons_controller");
+const get_coupons_controller_1 = require("./controllers/coupons/get_coupons_controller");
+const update_coupons_controller_1 = require("./controllers/coupons/update_coupons_controller");
+const delete_coupons_controller_1 = require("./controllers/coupons/delete_coupons_controller");
+const create_condicao_pagamento_controller_1 = require("./controllers/condicao_pagamento/create_condicao_pagamento_controller");
+const list_condicao_pagamento_controller_1 = require("./controllers/condicao_pagamento/list_condicao_pagamento_controller");
+const get_condicao_pagamento_controller_1 = require("./controllers/condicao_pagamento/get_condicao_pagamento_controller");
+const update_condicao_pagamento_controller_1 = require("./controllers/condicao_pagamento/update_condicao_pagamento_controller");
+const delete_condicao_pagamento_controller_1 = require("./controllers/condicao_pagamento/delete_condicao_pagamento_controller");
+const get_order_pdf_data_controller_1 = require("./controllers/pdf/get_order_pdf_data_controller");
+const get_orde_register_controller_1 = require("./controllers/register_link/get_orde_register_controller");
+const get_docs_validation_controller_1 = require("./controllers/order_documentation/get_docs_validation_controller");
 const isAuthenticated_1 = require("./middlewares/isAuthenticated");
 const router = (0, express_1.Router)();
 exports.router = router;
@@ -132,3 +151,59 @@ router.put("/orderdocs", new custumer_docs_controller_1.UpdateOrderDocs().handle
 router.put("/statusupdate", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new send_status_controller_1.SendStatusOrderController().handle);
+// Rotas para Midia
+// @ts-ignore
+router.post("/midia", isAuthenticated_1.isAuthenticated, new create_midia_controller_1.CreateMidiaController().handle);
+// @ts-ignore
+router.get("/midia", isAuthenticated_1.isAuthenticated, new list_midia_controller_1.ListMidiaController().handle);
+// @ts-ignore
+router.get("/midia/:id", isAuthenticated_1.isAuthenticated, new get_midia_controller_1.GetMidiaController().handle);
+// @ts-ignore
+router.put("/midia/:id", isAuthenticated_1.isAuthenticated, new update_midia_controller_1.UpdateMidiaController().handle);
+// @ts-ignore
+router.delete("/midia/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new delete_midia_controller_1.DeleteMidiaController().handle);
+// Rotas para Coupons
+// @ts-ignore
+router.post("/coupons", isAuthenticated_1.isAuthenticated, new create_coupons_controller_1.CreateCouponsController().handle);
+// @ts-ignore
+router.get("/coupons", isAuthenticated_1.isAuthenticated, new list_coupons_controller_1.ListCouponsController().handle);
+// @ts-ignore
+router.get("/coupons/:id", isAuthenticated_1.isAuthenticated, new get_coupons_controller_1.GetCouponsController().handle);
+// @ts-ignore
+router.put("/coupons/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new update_coupons_controller_1.UpdateCouponsController().handle);
+// @ts-ignore
+router.delete("/coupons/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new delete_coupons_controller_1.DeleteCouponsController().handle);
+// Rotas para Condicao_Pagamento
+// @ts-ignore
+router.post("/condicao-pagamento", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new create_condicao_pagamento_controller_1.CreateCondicaoPagamentoController().handle);
+// @ts-ignore
+router.get("/condicao-pagamento", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new list_condicao_pagamento_controller_1.ListCondicaoPagamentoController().handle);
+// @ts-ignore
+router.get("/condicao-pagamento/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new get_condicao_pagamento_controller_1.GetCondicaoPagamentoController().handle);
+// @ts-ignore
+router.put("/condicao-pagamento/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new update_condicao_pagamento_controller_1.UpdateCondicaoPagamentoController().handle);
+// @ts-ignore
+router.delete("/condicao-pagamento/:id", 
+// @ts-ignore
+isAuthenticated_1.isAuthenticated, new delete_condicao_pagamento_controller_1.DeleteCondicaoPagamentoController().handle);
+// Rotas para PDF
+// @ts-ignore
+router.get("/pdf/order/:id", new get_order_pdf_data_controller_1.GetOrderPDFDataController().handle);
+// @ts-ignore
+router.get("/register/order/:id", new get_orde_register_controller_1.GetOrderRegisterLinkController().handle);
+// @ts-ignore
+router.get("/orderdocs/:id", new get_docs_validation_controller_1.GetDocsValidationController().handle);

@@ -7,7 +7,6 @@ exports.UpdateOrderDocsService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 class UpdateOrderDocsService {
     async execute({ id_order, cpf_cnpj, passaporte, nome, email, ddi, ddd, telefone, compPag, cnh, }) {
-        console.log("service", id_order);
         const costumer = await prisma_1.default.costumer.create({
             data: {
                 nome,
@@ -26,7 +25,7 @@ class UpdateOrderDocsService {
             where: { id_order },
             data: {
                 id_costumer: costumer.id_costumer,
-                id_status_order: 3,
+                id_status_order: 6,
             },
         });
         const docsToCreate = [
@@ -49,7 +48,7 @@ class UpdateOrderDocsService {
         await prisma_1.default.orders_history.create({
             data: {
                 id_order,
-                id_status_order: 3,
+                id_status_order: 6,
             },
         });
     }

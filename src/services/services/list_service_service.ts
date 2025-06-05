@@ -1,5 +1,6 @@
 import prismaClient from "../../prisma";
 import { Prisma } from "@prisma/client";
+import { ConvertCurrency } from "../../shared/convert_currency";
 
 interface IListServicesRequest {
   search?: string;
@@ -54,9 +55,14 @@ class ListServiceService {
         type: true,
         price: true,
         observation: true,
+        time: true,
         created_at: true,
         updated_at: true,
       },
+    });
+
+    services.forEach(service => {
+      service.price = ConvertCurrency.centsToReal(service.price);
     });
 
     return {

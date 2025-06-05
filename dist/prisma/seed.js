@@ -27,6 +27,15 @@ async function main() {
                 ddd: "11",
                 phone: "999999999",
             },
+            {
+                name: "seller",
+                email: "seller@teste.com",
+                password: passwordHash,
+                id_position: 3,
+                ddi: "55",
+                ddd: "11",
+                phone: "999999999",
+            },
         ],
         // Caso já existam dados, esse parâmetro evita duplicatas
         skipDuplicates: true,
@@ -35,7 +44,12 @@ async function main() {
         data: [
             { description: "Aguardando envio" },
             { description: "Enviado ao Cliente" },
-            { description: "Comprovante Recebidos" },
+            { description: "Aprovado pelo cliente" },
+            { description: "Reprovado pelo cliente" },
+            { description: "Aguardando comprovantes" },
+            { description: "Comprovantes recebidos" },
+            { description: "Cancelado" },
+            { description: "Compra finalizada" },
         ],
         skipDuplicates: true,
     });
