@@ -5,8 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateOrderService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
+const convert_currency_1 = require("../../shared/convert_currency");
 class UpdateOrderService {
-    async execute({ id_order, id_user, id_costumer, price, id_status_order, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, }) {
+    async execute({ id_order, id_user, id_costumer, price, id_status_order, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, id_cond_pag, }) {
         const updatedOrder = await prisma_1.default.orders.update({
             where: { id_order },
             data: {
@@ -19,6 +20,7 @@ class UpdateOrderService {
                 pre_ddi,
                 pre_ddd,
                 pre_phone,
+                id_cond_pag,
                 orders_service: {
                     update: services
                         .filter(service => service.id_order_service !== undefined)
@@ -27,7 +29,7 @@ class UpdateOrderService {
                         data: {
                             id_service: service.id_service,
                             discount: service.discount,
-                            price: service.price,
+                            price: convert_currency_1.ConvertCurrency.realToCents(service.price),
                             suggested_date: service.suggested_date
                                 ? new Date(service.suggested_date)
                                 : null,
@@ -38,7 +40,7 @@ class UpdateOrderService {
                         .map(service => ({
                         id_service: service.id_service,
                         discount: service.discount,
-                        price: service.price,
+                        price: convert_currency_1.ConvertCurrency.realToCents(service.price),
                         suggested_date: service.suggested_date
                             ? new Date(service.suggested_date)
                             : null,
@@ -53,6 +55,7 @@ class UpdateOrderService {
                 pre_ddi: true,
                 pre_ddd: true,
                 pre_phone: true,
+                id_cond_pag: true,
                 price: true,
                 created_at: true,
                 costumer: {

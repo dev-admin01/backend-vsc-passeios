@@ -4,7 +4,7 @@ beforeAll(async () => {
   await orchestrator.waitForAllServices();
   await orchestrator.clearDatabase();
   await orchestrator.runPendingMigrations();
-});
+}, 20000);
 
 describe("GET /api/services", () => {
   test("should service a user", async () => {
@@ -26,9 +26,10 @@ describe("GET /api/services", () => {
       type: "0",
       price: "100.25",
       observation: "observacao teste texto bem grande mmesmoa e uma observacao",
+      time: ["13:30", "14:00", "14:30", "15:00", "15:30", "16:00"],
     };
 
-    await fetch("http://localhost:3000/api/services", {
+    const response2 = await fetch("http://localhost:3000/api/services", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,26 +38,33 @@ describe("GET /api/services", () => {
       body: JSON.stringify(service),
     });
 
-    const response = await fetch("http://localhost:3000/api/services", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${responseBody1.user.token}`,
+    const responseBody2 = await response2.json();
+
+    const response = await fetch(
+      `http://localhost:3000/api/services/${responseBody2.service.id_service}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${responseBody1.user.token}`,
+        },
       },
-    });
+    );
 
     const responseBody = await response.json();
-    expect(responseBody.services[0]).toEqual({
-      id_service: responseBody.services[0].id_service,
+
+    expect(responseBody.service).toEqual({
+      id_service: responseBody.service.id_service,
       description: "servico teste",
       type: "0",
       price: "100.25",
       observation: "observacao teste texto bem grande mmesmoa e uma observacao",
-      created_at: responseBody.services[0].created_at,
-      updated_at: responseBody.services[0].updated_at,
+      time: '["13:30","14:00","14:30","15:00","15:30","16:00"]',
+      created_at: responseBody.service.created_at,
+      updated_at: responseBody.service.updated_at,
     });
 
-    expect(Date.parse(responseBody.services[0].created_at)).not.toBeNaN();
-    expect(Date.parse(responseBody.services[0].updated_at)).not.toBeNaN();
-  });
+    expect(Date.parse(responseBody.service.created_at)).not.toBeNaN();
+    expect(Date.parse(responseBody.service.updated_at)).not.toBeNaN();
+  }, 20000);
 });

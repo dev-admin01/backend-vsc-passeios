@@ -7,24 +7,25 @@ class UpdateServiceController {
     async handle(req, res) {
         try {
             const { id } = req.params;
-            const { description, type, price, observation } = req.body;
+            const { description, type, price, observation, time } = req.body;
             const updateServiceService = new update_service_service_1.UpdateServiceService();
             const updatedService = await updateServiceService.execute({
-                id: Number(id),
+                id_service: Number(id),
                 description,
                 type,
                 price,
+                time,
                 observation,
             });
             return res.status(200).json({
-                message: "Service updated successfully",
+                message: "Passeio Atualizado com sucesso!",
                 service: updatedService,
                 status_code: 200,
             });
         }
         catch (error) {
             const publicErrorObject = new erros_1.ServiceError({
-                message: "Erro ao atualizar o serviço.",
+                message: "Erro ao atualizar o passeio.",
                 cause: error,
             });
             console.error(publicErrorObject);

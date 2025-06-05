@@ -6,10 +6,8 @@ const erros_1 = require("../../shared/erros");
 class SendStatusOrderController {
     async handle(req, res) {
         try {
-            const { id_order, id_user, id_status_order } = req.body;
-            console.log("id_order:", id_order);
-            console.log("id_user:", id_user);
-            console.log("id_status_order:", id_status_order);
+            const { id_order, id_status_order } = req.body;
+            const id_user = req.id_user;
             const updateOrderService = new send_status_service_1.SendStatusService();
             await updateOrderService.execute({
                 id_order,

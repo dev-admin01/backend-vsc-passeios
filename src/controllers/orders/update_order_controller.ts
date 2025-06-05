@@ -17,6 +17,7 @@ class UpdateOrderController {
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag,
       } = req.body;
 
       const updateOrderService = new UpdateOrderService();
@@ -32,6 +33,7 @@ class UpdateOrderController {
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag,
       });
 
       return res.status(200).json({

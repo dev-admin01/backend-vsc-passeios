@@ -6,7 +6,7 @@ import { ServiceError } from "../../shared/erros";
 class CreateServiceController {
   async handle(req: Request, res: Response) {
     try {
-      const { description, type, price, observation } = req.body;
+      const { description, type, price, observation, time } = req.body;
       const serviceServ = new CreateServiceService();
 
       const service = await serviceServ.execute({
@@ -14,10 +14,11 @@ class CreateServiceController {
         type,
         price,
         observation,
+        time,
       });
 
       return res.status(201).json({
-        message: "Service created successfully",
+        message: "Passeio criado com sucesso!",
         service,
         status_code: 201,
       });

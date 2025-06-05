@@ -5,8 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
+const convert_currency_1 = require("../../shared/convert_currency");
 class CreateOrderService {
-    async execute({ id_user, price, services = [], pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, }) {
+    async execute({ id_user, price, services = [], pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, id_cond_pag, id_coupons, }) {
+        console.log("id_cond_pag", id_cond_pag);
+        console.log("id_coupons", id_coupons);
         const lastOrder = await prisma_1.default.orders.findFirst({
             orderBy: { created_at: "desc" },
             select: { order_number: true },
@@ -26,17 +29,21 @@ class CreateOrderService {
         const monthStr = (now.getMonth() + 1).toString().padStart(2, "0");
         const yearStr = now.getFullYear().toString().slice(-2);
         const orderNumber = `${sequenceStr}${monthStr}${yearStr}`;
+        const convertPrice = convert_currency_1.ConvertCurrency.realToCents(price);
         const order = await prisma_1.default.orders.create({
             data: {
                 id_user,
                 order_number: orderNumber,
-                price,
+                price: convertPrice,
                 id_status_order: 1,
                 pre_name,
                 pre_email,
                 pre_ddi,
                 pre_ddd,
                 pre_phone,
+                id_cond_pag: id_cond_pag ? id_cond_pag : null,
+                id_coupons: id_coupons ? id_coupons : null,
+                time: new Date().toISOString(),
             },
         });
         // 2. Cria os registros em orders_service, se houver
@@ -45,8 +52,10 @@ class CreateOrderService {
                 id_order: order.id_order,
                 id_service: srv.id_service,
                 discount: srv.discount,
-                price: srv.price,
+                price: convert_currency_1.ConvertCurrency.realToCents(srv.price),
                 suggested_date: srv.suggested_date,
+                time: srv.time,
+                quantity: srv.quantity,
             }));
             await prisma_1.default.orders_service.createMany({ data: serviceData });
         }
@@ -72,6 +81,8 @@ class CreateOrderService {
                 pre_phone: true,
                 price: true,
                 created_at: true,
+                id_cond_pag: true,
+                id_coupons: true,
                 orders_service: {
                     select: {
                         id_order_service: true,
@@ -80,9 +91,15 @@ class CreateOrderService {
                         discount: true,
                         price: true,
                         suggested_date: true,
+                        time: true,
+                        quantity: true,
                     },
                 },
             },
+        });
+        completeOrder.price = convert_currency_1.ConvertCurrency.centsToReal(completeOrder.price);
+        completeOrder.orders_service.forEach(service => {
+            service.price = convert_currency_1.ConvertCurrency.centsToReal(service.price);
         });
         return completeOrder;
     }

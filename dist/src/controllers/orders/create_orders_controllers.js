@@ -6,7 +6,7 @@ const erros_1 = require("../../shared/erros");
 class CreateOrderController {
     async handle(req, res) {
         try {
-            const { id_user, price, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, } = req.body;
+            const { id_user, price, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, id_cond_pag, id_coupons, } = req.body;
             const createOrderService = new create_orders_service_1.CreateOrderService();
             const order = await createOrderService.execute({
                 id_user,
@@ -17,9 +17,11 @@ class CreateOrderController {
                 pre_ddi,
                 pre_ddd,
                 pre_phone,
+                id_cond_pag,
+                id_coupons,
             });
             return res.status(201).json({
-                message: "Order created successfully",
+                message: `Orçamento ${order.order_number} criado com sucesso!`,
                 order,
                 status_code: 201,
             });

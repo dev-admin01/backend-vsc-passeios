@@ -12,6 +12,7 @@ class ListOrderController {
         search: String(search),
         page: Number(page),
         perpage: Number(perpage),
+        id_user: req.id_user,
       });
 
       return res.status(200).json({

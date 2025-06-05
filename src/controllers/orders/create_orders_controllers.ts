@@ -15,6 +15,8 @@ class CreateOrderController {
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag,
+        id_coupons,
       } = req.body;
 
       const createOrderService = new CreateOrderService();
@@ -27,10 +29,12 @@ class CreateOrderController {
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag,
+        id_coupons,
       });
 
       return res.status(201).json({
-        message: "Order created successfully",
+        message: `Orçamento ${order.order_number} criado com sucesso!`,
         order,
         status_code: 201,
       });

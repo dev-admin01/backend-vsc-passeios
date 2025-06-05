@@ -1,4 +1,5 @@
 import prismaClient from "../../prisma";
+import { ConvertCurrency } from "../../shared/convert_currency";
 import { ICreateOrderService } from "../../types/order.type";
 
 class CreateOrderService {
@@ -11,7 +12,11 @@ class CreateOrderService {
     pre_ddi,
     pre_ddd,
     pre_phone,
+    id_cond_pag,
+    id_coupons,
   }: ICreateOrderService) {
+    console.log("id_cond_pag", id_cond_pag);
+    console.log("id_coupons", id_coupons);
     const lastOrder = await prismaClient.orders.findFirst({
       orderBy: { created_at: "desc" },
       select: { order_number: true },
@@ -34,17 +39,22 @@ class CreateOrderService {
 
     const orderNumber = `${sequenceStr}${monthStr}${yearStr}`;
 
+    const convertPrice = ConvertCurrency.realToCents(price);
+
     const order = await prismaClient.orders.create({
       data: {
         id_user,
         order_number: orderNumber,
-        price,
+        price: convertPrice,
         id_status_order: 1,
         pre_name,
         pre_email,
         pre_ddi,
         pre_ddd,
         pre_phone,
+        id_cond_pag: id_cond_pag ? id_cond_pag : null,
+        id_coupons: id_coupons ? id_coupons : null,
+        time: new Date().toISOString(),
       },
     });
 
@@ -54,8 +64,10 @@ class CreateOrderService {
         id_order: order.id_order,
         id_service: srv.id_service,
         discount: srv.discount,
-        price: srv.price,
+        price: ConvertCurrency.realToCents(srv.price),
         suggested_date: srv.suggested_date,
+        time: srv.time,
+        quantity: srv.quantity,
       }));
       await prismaClient.orders_service.createMany({ data: serviceData });
     }
@@ -83,6 +95,8 @@ class CreateOrderService {
         pre_phone: true,
         price: true,
         created_at: true,
+        id_cond_pag: true,
+        id_coupons: true,
         orders_service: {
           select: {
             id_order_service: true,
@@ -91,9 +105,17 @@ class CreateOrderService {
             discount: true,
             price: true,
             suggested_date: true,
+            time: true,
+            quantity: true,
           },
         },
       },
+    });
+
+    completeOrder.price = ConvertCurrency.centsToReal(completeOrder.price);
+
+    completeOrder.orders_service.forEach(service => {
+      service.price = ConvertCurrency.centsToReal(service.price);
     });
 
     return completeOrder;

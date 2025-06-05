@@ -3,6 +3,7 @@ export interface ServiceType {
   description: string;
   type: string;
   price: string;
+  time: string;
   observation: string;
   created_at?: string;
   updated_at?: string;

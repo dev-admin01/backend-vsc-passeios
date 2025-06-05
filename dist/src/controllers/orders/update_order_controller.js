@@ -7,7 +7,7 @@ class UpdateOrderController {
     async handle(req, res) {
         try {
             const { id } = req.params;
-            const { id_user, id_costumer, price, id_status_order, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, } = req.body;
+            const { id_user, id_costumer, price, id_status_order, services, pre_name, pre_email, pre_ddi, pre_ddd, pre_phone, id_cond_pag, } = req.body;
             const updateOrderService = new update_order_services_1.UpdateOrderService();
             const updatedOrder = await updateOrderService.execute({
                 id_order: id,
@@ -21,6 +21,7 @@ class UpdateOrderController {
                 pre_ddi,
                 pre_ddd,
                 pre_phone,
+                id_cond_pag,
             });
             return res.status(200).json({
                 message: "Order updated successfully",
