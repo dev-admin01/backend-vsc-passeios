@@ -55,7 +55,7 @@ model costumer {
   nome          String
   email         String  @unique
   cpf_cnpj      String? @unique
-  passaporte    String? @unique
+  passaporte    String? @unique 
   razao_social  String?
   nome_fantasia String?
   ddi           String?
@@ -92,6 +92,10 @@ model orders {
 
   id_coupons String?
   coupons Coupon? @relation(fields: [id_coupons], references: [id_coupons])
+
+  hotel String?
+  hotel_checkin DateTime?
+  hotel_checkout DateTime?
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

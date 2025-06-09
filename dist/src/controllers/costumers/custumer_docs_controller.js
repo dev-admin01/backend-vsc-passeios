@@ -7,7 +7,7 @@ class UpdateOrderDocs {
     async handle(req, res) {
         try {
             const body = req.body;
-            const { id_order, cpf_cnpj, passaport, name, email, ddi, ddd, phone, compPag, cnh, } = body;
+            const { id_order, cpf_cnpj, passaport, name, email, ddi, ddd, phone, hotel, hotelCheckin, hotelCheckout, compPag, cnh, } = body;
             const createCostumerService = new custumer_docs_service_1.UpdateOrderDocsService();
             await createCostumerService.execute({
                 id_order,
@@ -18,6 +18,9 @@ class UpdateOrderDocs {
                 ddi,
                 ddd,
                 telefone: phone,
+                hotel,
+                hotelCheckin,
+                hotelCheckout,
                 compPag,
                 cnh,
             });

@@ -5,11 +5,11 @@ import { ServiceError } from "../../shared/erros";
 class GetDocsValidationController {
   async handle(req: Request, res: Response) {
     try {
-      const { orderId } = req.params;
+      const { id } = req.params;
 
       const getDocsValidationService = new GetDocsValidationService();
 
-      const docsValidation = await getDocsValidationService.execute(orderId);
+      const docsValidation = await getDocsValidationService.execute(id);
 
       if (docsValidation.length === 0) {
         return res.status(404).json({ message: "Nenhum documento encontrado" });

@@ -15,6 +15,9 @@ class UpdateOrderDocs {
         ddi,
         ddd,
         phone,
+        hotel,
+        hotelCheckin,
+        hotelCheckout,
         compPag,
         cnh,
       } = body;
@@ -30,6 +33,9 @@ class UpdateOrderDocs {
         ddi,
         ddd,
         telefone: phone,
+        hotel,
+        hotelCheckin,
+        hotelCheckout,
         compPag,
         cnh,
       });
