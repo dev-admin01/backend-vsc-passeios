@@ -13,13 +13,16 @@ class UpdateOrderDocsService {
     telefone,
     compPag,
     cnh,
+    hotel,
+    hotelCheckin,
+    hotelCheckout,
   }: OrderDocs) {
     const costumer = await prismaClient.costumer.create({
       data: {
         nome,
         email,
         cpf_cnpj,
-        passaporte,
+        passaporte: passaporte || null,
         ddi,
         ddd,
         telefone,
@@ -29,11 +32,22 @@ class UpdateOrderDocsService {
       },
     });
 
+    // Formatando as datas para ISO-8601
+    const formattedCheckin = hotelCheckin
+      ? new Date(hotelCheckin).toISOString()
+      : null;
+    const formattedCheckout = hotelCheckout
+      ? new Date(hotelCheckout).toISOString()
+      : null;
+
     await prismaClient.orders.update({
       where: { id_order },
       data: {
         id_costumer: costumer.id_costumer,
         id_status_order: 6,
+        hotel,
+        hotel_checkin: formattedCheckin,
+        hotel_checkout: formattedCheckout,
       },
     });
 
