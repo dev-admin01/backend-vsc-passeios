@@ -12,7 +12,7 @@ class GetCostumerController {
 
       if (!costumer) {
         return res.status(404).json({
-          message: "Costumer not found",
+          message: "Cliente não encontrado",
           status_code: 404,
         });
       }

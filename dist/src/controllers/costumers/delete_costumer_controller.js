@@ -10,7 +10,7 @@ class DeleteCostumerController {
             const deleteCostumerService = new delete_costumer_service_1.DeleteCostumerService();
             await deleteCostumerService.execute(id);
             return res.status(200).json({
-                message: "Costumer deleted successfully",
+                message: "Cliente excluído com sucesso",
                 status_code: 200,
             });
         }

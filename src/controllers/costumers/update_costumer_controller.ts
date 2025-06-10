@@ -35,7 +35,7 @@ class UpdateCostumerController {
       });
 
       return res.status(200).json({
-        message: "Costumer updated successfully",
+        message: "Cliente atualizado com sucesso",
         costumer: updatedCostumer,
         status_code: 200,
       });

@@ -34,7 +34,7 @@ class CreateCostumerController {
       });
 
       return res.status(201).json({
-        message: "Costumer created successfully",
+        message: "Cliente criado com sucesso",
         costumer,
         status_code: 201,
       });
