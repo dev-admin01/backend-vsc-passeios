@@ -32,7 +32,7 @@ class ListCostumerService {
         // Calcula a última página
         const lastPage = Math.ceil(totalCount / perpage);
         // Busca os registros paginados
-        const costumers = await prisma_1.default.costumer.findMany({
+        const customers = await prisma_1.default.costumer.findMany({
             where: whereCondition,
             skip,
             take: perpage,
@@ -53,7 +53,7 @@ class ListCostumerService {
             },
         });
         return {
-            costumers,
+            customers,
             page,
             perpage,
             lastPage,

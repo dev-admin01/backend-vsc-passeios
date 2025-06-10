@@ -88,21 +88,21 @@ router.delete("/services/:id",
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new delete_service_controller_1.DeleteServiceController().handle);
 // @ts-ignore
-router.post("/costumers", 
+router.post("/customers", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new create_costumer_controller_1.CreateCostumerController().handle);
 // @ts-ignore
-router.get("/costumers", isAuthenticated_1.isAuthenticated, new list_costumer_controller_1.ListCostumerController().handle);
+router.get("/customers", isAuthenticated_1.isAuthenticated, new list_costumer_controller_1.ListCostumerController().handle);
 // @ts-ignore
-router.get("/costumers/:id", 
+router.get("/customers/:id", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new get_costumer_controller_1.GetCostumerController().handle);
 // @ts-ignore
-router.put("/costumers/:id", 
+router.put("/customers/:id", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new update_costumer_controller_1.UpdateCostumerController().handle);
 // @ts-ignore
-router.delete("/costumers/:id", 
+router.delete("/customers/:id", 
 // @ts-ignore
 isAuthenticated_1.isAuthenticated, new delete_costumer_controller_1.DeleteCostumerController().handle);
 // @ts-ignore
