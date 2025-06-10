@@ -102,30 +102,30 @@ router.delete(
 );
 // @ts-ignore
 router.post(
-  "/costumers",
+  "/customers",
   // @ts-ignore
   isAuthenticated,
   new CreateCostumerController().handle,
 );
 // @ts-ignore
-router.get("/costumers", isAuthenticated, new ListCostumerController().handle);
+router.get("/customers", isAuthenticated, new ListCostumerController().handle);
 // @ts-ignore
 router.get(
-  "/costumers/:id",
+  "/customers/:id",
   // @ts-ignore
   isAuthenticated,
   new GetCostumerController().handle,
 );
 // @ts-ignore
 router.put(
-  "/costumers/:id",
+  "/customers/:id",
   // @ts-ignore
   isAuthenticated,
   new UpdateCostumerController().handle,
 );
 // @ts-ignore
 router.delete(
-  "/costumers/:id",
+  "/customers/:id",
   // @ts-ignore
   isAuthenticated,
   new DeleteCostumerController().handle,
